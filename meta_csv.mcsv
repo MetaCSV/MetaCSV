@@ -1,0 +1,12 @@
+domain,key,value
+file,encoding,utf-8
+file,lineterminator,"\r\n"
+csv,delimiter,","
+csv,doublequote,True
+csv,quotechar,""""
+data,col/0/type,text
+data,col/0/nullable,False
+data,col/1/type,text
+data,col/1/nullable,False
+data,col/2/type,Any
+data,col/2/nullable,False
