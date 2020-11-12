@@ -1,12 +1,9 @@
 domain,key,value
 file,encoding,utf-8
-file,lineterminator,"\r\n"
+file,line_terminator,"\r\n"
 csv,delimiter,","
-csv,doublequote,True
-csv,quotechar,""""
+csv,double_quote,true
+csv,quote_char,""""
 data,col/0/type,text
-data,col/0/nullable,False
 data,col/1/type,text
-data,col/1/nullable,False
-data,col/2/type,Any
-data,col/2/nullable,False
+data,col/2/type,any

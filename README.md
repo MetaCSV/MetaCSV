@@ -7,25 +7,27 @@ License: GPLv3
 **Work in progress**
 
 # Overview
-MetaCSV is an open specification for a CSV file description. This description is written in a small auxiliary CSV file that may be stored along wih the CSV file itself. This auxilary file should provide the informations necessary to read and type the content of the CSV file.
+MetaCSV is an open specification for a CSV file description. This description is written in a small auxiliary CSV file that may be stored along wih the CSV file itself. This auxilary file should provide the informations necessary to read and type the content of the CSV file. The standard extension is ".mcsv".
 
 MetaCSV aims to be simple and extensible.
 
 MetaCSV interpreters will be able to load CSV files into a typed table format, such as SQL or ODS.
 
+**The format is free to use (using it in your own software will not make it GPL) but if you derive a format from MetaCSV, please comply with the license.**
+
 ## Example
 Here's the content of the circular [`meta_csv.mcsv`](meta_csv.mcsv) file, with some comments:
 
-domain | key            | value
--------|----------------|-------
-file   | encoding       | UTF-8
-file   | lineterminator | \r\n
-csv    | delimiter      | ,
-csv    | doublequote    | true
-csv    | quotechar      | "
-data   | col/0/type     | text
-data   | col/1/type     | text
-data   | col/2/type     | any
+domain | key             | value
+-------|-----------------|-------
+file   | encoding        | UTF-8
+file   | line_terminator | \r\n
+csv    | delimiter       | ,
+csv    | double_quote    | true
+csv    | quote_char      | "
+data   | col/0/type      | text
+data   | col/1/type      | text
+data   | col/2/type      | any
 
 The first column, `domain`, should to be one of the following: `file`, `csv` or `data`. The second column is a `key` which might have multiple parts separated by slashes (`/`). The third column is a `value` which might also have several parts separated by slashes (`/`).
 
@@ -61,7 +63,14 @@ data   | col/4/type     | currency/pre/$/,/.
 data   | col/5/type     | currency/post/€/,/.
 
 ## List of software using MetaCSV
-Give me a break! I'm working on it...
+My work:
+* [ColumnDet](https://github.com/jferard/ColumnDet) can export its result to a MetaCSV file.
+* TODO: [py-mcsv](https://github.com/jferard/py-mcsv) will be able to parse MetaCSV files and read/type CSV data on the fly.
+* TODO: [CSVInspector](https://github.com/jferard/CSVInspector) will use MetaCSV as a communication format.
+* TODO: [FastODS](https://github.com/jferard/py-mcsv) will be able to generate a Calc document from a  CSV file having MetaCSV data.
+
+External work:
+* help yourself!
 
 ## Difference with CSVSchema
 CSVSchema was designed by The National Archives (United Kingdom). It is:
@@ -84,14 +93,14 @@ The `domain` column can be either `file`, `csv` or `data`
 ## The `file` domain
 The `file` domain describes the encoding and line separator of the text file.
 
-Accepted keys are `encoding` and `lineterminator`.
+Accepted keys are `encoding` and `line_terminator`.
 
 ### The `file`-`encoding` value
 The value is an encoding as in https://www.iana.org/assignments/character-sets/character-sets.txt.
 
 Default value is `UTF-8`.
 
-### The `file`-`lineterminator` value
+### The `file`-`line_terminator` value
 The value is one of: `\n`, `\r\n`, `n\r`, `\r` or any other byte sequence that is the line terminator of the CSV file.
 
 Default value is `\r\n`.
@@ -99,29 +108,29 @@ Default value is `\r\n`.
 ## The `csv` domain
 The keys are based on the [Python `csv` module](https://docs.python.org/3/library/csv.html#dialects-and-formatting-parameters):
 
-Accepted keys are: `delimiter`, `doublequote`, `escapechar`, `quotechar`, `quoting`, `skipinitialspace`.
+Accepted keys are: `delimiter`, `double_quote`, `escape_char`, `quote_char`, `quoting`, `skip_initial_space`.
 
 ### The `csv-delimiter` value
 The delimiter.
 
 Default value is `,`.
 
-### The `csv-doublequote` value
-If true, double `quotechar` to escape `quotechar`. If false, use `escapechar` to escape `quotechar`.
+### The `csv-double_quote` value
+If true, double `quote_char` to escape `quote_char`. If false, use `escape_char` to escape `quote_char`.
 
 Default value is `true`.
 
-### The `csv-escapechar` value
-If `doubleqote` is false, the escape char.
+### The `csv-escape_char` value
+If `double_quote` is false, the escape char.
 
 No default value.
 
-### The `csv-quotechar` value
+### The `csv-quote_char` value
 The quote char.
 
 Default value is `"`.
 
-### The `csv-skipinitialspace` value
+### The `csv-skip_initial_space` value
 If true, skip the space following the delimiter.
 
 Default value is `false`.
