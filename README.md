@@ -191,12 +191,14 @@ The `date` value type has the format:
     date/<date format>/<locale>
 
 where:
-* `<date format>` is the format of the date as in https://www.postgresql.org/docs/current/functions-formatting.html.
+* `<date format>` is the format of the date as in the [Unicode Locale Data Markup Language (LDML)](http://www.unicode.org/reports/tr35/tr35-dates.html#Date_Field_Symbol_Table).
 * `<locale>` is the name of the locale with the format `<language>_<country>`.
 
 The locale may be omitted, but is useful for localized day names and month names.
 
-Examples: `date/YYYY-MM-DD`
+Examples: `date/yyyy-MM-dd`
+
+Note: the Java [`SimpleDateFormat`](https://docs.oracle.com/en/java/javase/15/docs/api/java.base/java/text/SimpleDateFormat.html) covers a subset of the symbols of the Unicode LDML.
 
 ### The `datetime` value type
 The `datetime` value type has the format:
