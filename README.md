@@ -65,12 +65,15 @@ data   | col/5/type     | currency/post/€/,/.
 ## List of software using MetaCSV
 My work:
 * [ColumnDet](https://github.com/jferard/ColumnDet) can export its result to a MetaCSV file.
-* TODO: [py-mcsv](https://github.com/jferard/py-mcsv) will be able to parse MetaCSV files and read/type CSV data on the fly.
-* TODO: [CSVInspector](https://github.com/jferard/CSVInspector) will use MetaCSV as a communication format.
-* TODO: [FastODS](https://github.com/jferard/py-mcsv) will be able to generate a Calc document from a  CSV file having MetaCSV data.
+* [py-mcsv](https://github.com/jferard/py-mcsv) is able to parse MetaCSV files and read/type CSV data on the fly.
+
+My work - TODO:
+* [CSVInspector](https://github.com/jferard/CSVInspector) will use MetaCSV as a communication format.
+* [FastODS](https://github.com/jferard/py-mcsv) 0.7.4 will be able to generate a Calc document from a  CSV file having MetaCSV data.
 
 External work:
-* help yourself!
+* help yourself! The MetaCSV format is free to use...
+
 
 ## Difference with CSVSchema
 CSVSchema was designed by The National Archives (United Kingdom). It is:
