@@ -150,6 +150,12 @@ parser* and a *MetaCSV renderer*.
 
 It should provide a *MetaCSV reader* and a *MetaCSV writer*.
 
+It should not depend on non standard libraries (or modules) other than a
+library (or module) to read and write CSV files.
+
+If some formats are handled by the standard libraries (or modules), the MetaCSV
+library may provide a conversion to those formats.
+
 ## 1. Domain, key, value
 The `domain` column can be either `file`, `csv` or `data`.
 
