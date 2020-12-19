@@ -221,7 +221,17 @@ type of the columns.
 Each key has the format `col/<n>/type`, where `<n>` is the number of the
 column, starting at 0.
 
-### 4.1 The `data`-`col/<n>/type` value.
+### 4.1 the `data - null_value` value
+The value to be mapped to a string representing the absence of a value, as NULL
+in SQL.
+
+Example: `<NULL>`
+
+Canonical value is an empty string.
+
+This value may be overriden by the  value of `data - col/n/null_value`.
+
+### 4.2 The `data`-`col/<n>/type` value
 The value decribe the type of a column.
 
 The format of the value is always: `type/parameter 1/parameter 2/.../parameter
@@ -357,8 +367,21 @@ The `any` value type has the format:
 
     any/<free data>
 
-This tells the interpreter that it has to interpret the column values, but does not provide any further information unless `<free data>` is provided.
+This tells the interpreter that it has to interpret the column values, but
+does not provide any further information unless `<free data>` is provided.
 
 Examples: `any`
 
 No canonical form.
+
+### 4.3 The `data`-`col/<n>/null_value` value
+The value to be mapped to a string representing the absence of a value, as NULL
+in SQL, for the column <n>.
+
+Example: `<NULL>`
+
+Canonical value is an empty string.
+
+This value overrides the value of `data - null_value` for this column. This is
+useful when columns have a different sources and different marks to signal the
+absence of a value.

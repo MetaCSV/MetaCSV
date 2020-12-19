@@ -1,5 +1,5 @@
 domain,key,value
-file,encoding,utf-8
+file,encoding,UTF-8
 file,line_terminator,"\r\n"
 csv,delimiter,","
 csv,double_quote,true
