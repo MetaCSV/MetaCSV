@@ -176,7 +176,23 @@ https://www.iana.org/assignments/character-sets/character-sets.txt.
 
 Canonical value is `UTF-8`.
 
-### 2.2 The `file`-`line_terminator` value
+*Note: A parser may accept the `UTF-8-SIG` encoding as:
+
+domain | key            | value
+-------|----------------|------------------
+file   | encoding       | UTF-8
+file   | bom            | true
+
+But a renderer must not emit the `UTF-8-SIG` encoding.*
+
+### 2.1 The `file`-`bom` value
+The value is a boolean. If the encoding is `UTF-8` and the `file - bom`
+value is true, the file starts with the infamous Microsoft's BOM.
+
+Canonical value is `false`.
+
+
+### 2.3 The `file`-`line_terminator` value
 The value is one of: `\n`, `\r\n`, `n\r`, `\r` or any other byte sequence that
 is the line terminator of the CSV file.
 
@@ -382,6 +398,7 @@ Example: `<NULL>`
 
 Canonical value is an empty string.
 
-This value overrides the value of `data - null_value` for this column. This is
-useful when columns have a different sources and different marks to signal the
-absence of a value.
+This value overrides the value of `data - null_value` for this column.
+
+*Note: This is useful when columns have a different sources and different marks
+to signal the absence of a value.
