@@ -21,8 +21,8 @@ such as SQL or ODS.
 GPL) but if you derive a format from MetaCSV, please comply with the license.**
 
 ## Example
-Here's the content of the circular [`meta_csv.mcsv`](meta_csv.mcsv) file, with
-some comments:
+Here's the content of the self-referential [`meta_csv.mcsv`](meta_csv.mcsv)
+file, with some comments:
 
 domain | key             | value
 -------|-----------------|-------
@@ -104,9 +104,13 @@ http://digital-preservation.github.io/csv-schema/)
  Here's a synoptic presentation of the differences:
 
 |               | CSVSchema           | MetaCSV
-|----------------|---------------------|---------------------
-|goal            | validate a CSV file | interpret a CSV file
-|format          | specific language   | CSV file
+|---------------|---------------------|---------------------
+|goal           | validate a CSV file | interpret a CSV file
+|format         | specific language   | CSV file
+
+The choice of the CSV format to type the CSV file guarantees that MetaCSV
+libraries will be esay to implement and only depend on a CSV reader/writer
+library or module only.
 
 # Full specification (DRAFT 0)
 ## 0. Definitions
