@@ -80,6 +80,10 @@ data   | col/5/type     | currency/post/€/,/.
 My work:
 * [ColumnDet](https://github.com/jferard/ColumnDet) can export its result to a
 MetaCSV file.
+* [java-mcsv](https://github.com/jferard/java-mcsv) is the reference
+implementation for *MetaCSV libraries* (see definitions below): able to parse
+MetaCSV files, read/type CSV data on the fly in Java, and to read and write
+`ResultSet`s.
 * [py-mcsv](https://github.com/jferard/py-mcsv) aims to be a *MetaCSV library*
 (see definitions below): able to parse MetaCSV files and read/type CSV data
 on the fly.
