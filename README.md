@@ -8,8 +8,8 @@ License: GPLv3
 
 # Overview
 MetaCSV is an open specification for a CSV file description. This description
-is written in a small auxiliary CSV file that may be stored along wih the CSV
-file itself. This auxilary file should provide the informations necessary to
+is written in a small auxiliary CSV file that may be stored along with the CSV
+file itself. This auxiliary file should provide the information necessary to
 read and type the content of the CSV file. The standard extension is ".mcsv".
 
 MetaCSV aims to be simple and extensible.
@@ -33,7 +33,7 @@ csv    | double_quote    | true
 csv    | quote_char      | "
 data   | col/0/type      | text
 data   | col/1/type      | text
-data   | col/2/type      | any
+data   | col/2/type      | object/base64
 
 The first column, `domain`, should to be one of the following: `file`, `csv`
 or `data`. The second column is a `key` which might have multiple parts
@@ -55,7 +55,7 @@ Hence the previous example could be written:
 
 domain | key            | value
 -------|----------------|-------
-data   | col/2/type     | any
+data   | col/2/type     | object/base64
 
 ## The `data` domain
 
@@ -113,7 +113,7 @@ http://digital-preservation.github.io/csv-schema/)
 |format         | specific language   | CSV file
 
 The choice of the CSV format to type the CSV file guarantees that MetaCSV
-libraries will be esay to implement and only depend on a CSV reader/writer
+libraries will be easy to implement and only depend on a CSV reader/writer
 library or module only.
 
 # Full specification (DRAFT 0)
@@ -253,10 +253,10 @@ Example: `<NULL>`
 
 Canonical value is an empty string.
 
-This value may be overriden by the  value of `data - col/n/null_value`.
+This value may be overridden by the  value of `data - col/n/null_value`.
 
 ### 4.2 The `data`-`col/<n>/type` value
-The value decribe the type of a column.
+The value describe the type of a column.
 
 The format of the value is always: `type/parameter 1/parameter 2/.../parameter
 n`.
@@ -264,7 +264,7 @@ n`.
 Further details:
 * there may be zero parameters
 * if a parameter is empty or null, it is blank (two slashes are consecutive).
-* if the last parameters are empty or null, they may be ommited.
+* if the last parameters are empty or null, they may be omitted.
 
 The data types are based on [ODF value types](
 http://docs.oasis-open.org/office/v1.2/os/OpenDocument-v1.2-os-part1.html#__RefHeading__1417680_253892949):
@@ -279,7 +279,7 @@ type        | description
 `integer`   | an integer value
 `percentage`| a percentage value
 `text`      | a text value
-`any`       | a column having multiple value types
+`object`    | a value of another type
 
 The reader needs information about the specific format of the values of a data
 type. For instance, a true boolean may be `1`, `true`, `vrai`... The reader
@@ -308,7 +308,7 @@ The `currency` value type has the format:
 
 where:
 * `<pre|post|>` is either `pre`, `post` or empty to indicate if the currency
-symbol is before or after the amount, or is ommitted.
+symbol is before or after the amount, or is omitted.
 * `<currency symbol>` is the currency symbol (a sign, a code, a name)
 * `<integer value|float value>` is either an integer value or a float value description.
 
@@ -386,15 +386,38 @@ Example: `text`
 
 Canonical form: `text`
 
-### The `any` value type
-The `any` value type has the format:
+### The `object` value type
+The `object` value type has the format:
 
-    any/<free data>
+    object/<parameters>
 
-This tells the interpreter that it has to interpret the column values, but
-does not provide any further information unless `<free data>` is provided.
+#### A catch-all type
+Basically, the `object` type is a catch-all type for columns whose type is not one of the explicit MetaCSV types (`boolean`, `currency`, `date`, `datetime`, `float`, `integer`, `percentage`, `text`). The column data may have various types, or one type that is not defined by MetaCSV.
 
-Examples: `any`
+MetaCSV allows extra parameters to specify the actual type of the column, but those parameters are **not standardized**.
+
+If there is no extra parameter:
+* A *MetaCSV reader* must return this value as text and let the user handle the value.
+* A *MetaCSV writer* must accept a textual representation of the value given by the user.
+
+If there are some extra parameters:
+* A *MetaCSV reader* may return this value as text and let the user handle the value, or may use the given parameters to return a typed value.
+* A *MetaCSV writer* must accept a textual representation of the value or *MetaCSV writer* use the given parameters to create the textual representation of the value given by the user.
+
+The behavior of *MetaCSV reader* s and *MetaCSV writer* s that belong to a same library must be consistent: an `object` typed value written by the *MetaCSV writer* and read by the *MetaCSV reader* will be the same as the initial value. **But there is no general guarantee that foreign *MetaCSV reader* s and *MetaCSV writer* s will be consistent**.
+
+#### Examples
+If the type of the column is simply:
+
+    object
+
+But the user *knows* that the column contains JSON data, the user will be able to parse it.
+
+If the type of the column is:
+
+    object/base64
+
+The *MetaCSV reader* may decode the base64 value to return binary data. And the *MetaCSV writer* may encode binary data in base64 (and must accept a base64 encoded value).
 
 No canonical form.
 
