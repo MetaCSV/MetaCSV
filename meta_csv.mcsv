@@ -6,4 +6,4 @@ csv,double_quote,true
 csv,quote_char,""""
 data,col/0/type,text
 data,col/1/type,text
-data,col/2/type,any
+data,col/2/type,object

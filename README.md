@@ -33,7 +33,7 @@ csv    | double_quote    | true
 csv    | quote_char      | "
 data   | col/0/type      | text
 data   | col/1/type      | text
-data   | col/2/type      | object/base64
+data   | col/2/type      | object
 
 The first column, `domain`, should to be one of the following: `file`, `csv`
 or `data`. The second column is a `key` which might have multiple parts
@@ -55,7 +55,7 @@ Hence the previous example could be written:
 
 domain | key            | value
 -------|----------------|-------
-data   | col/2/type     | object/base64
+data   | col/2/type     | object
 
 ## The `data` domain
 
