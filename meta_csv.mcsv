@@ -1,4 +1,5 @@
 domain,key,value
+meta,version,draft0
 file,encoding,UTF-8
 file,line_terminator,"\r\n"
 csv,delimiter,","
