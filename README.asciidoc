@@ -94,8 +94,8 @@ if necessary):
 | data   | col/1/type     | date/DD\/MM\/YYYY
 | data   | col/2/type     | float/,/.
 | data   | col/3/type     | boolean/vrai/faux
-| data   | col/4/type     | currency/pre/$/,/.
-| data   | col/5/type     | currency/post/€/,/.
+| data   | col/4/type     | currency/pre/$/decimal/,/.
+| data   | col/5/type     | currency/post/€/decimal/,/.
 |===
 
 === List of software using MetaCSV
@@ -352,19 +352,19 @@ Canonical form: `boolean/true/false`
 ===== The `currency` value type
 The `currency` value type has the format:
 
-    currency/<pre|post>/<currency symbol>/<integer value|float value>
+    currency/<pre|post>/<currency symbol>/<integer value|decimal value>
 
 where:
 
 * `<pre|post|>` is either `pre`, `post` or empty to indicate if the currency
 symbol is before or after the amount, or is omitted.
 * `<currency symbol>` is the currency symbol (a sign, a code, a name)
-* `<integer value|float value>` is either an integer value or a float value
-description.
+* `<integer value|decimal value>` is either an integer value or a decimal value
+(float is *not* allowed)description.
 
-Examples: `currency/post/€/float/ /,`
+Examples: `currency/post/€/decimal/ /,`
 
-Canonical form: `currency//<currency symbol>/float//.`
+Canonical form: `currency//<currency symbol>/decimal//.`
 
 ===== The `date` value type
 The `date` value type has the format:
@@ -425,9 +425,10 @@ Canonical form: `integer`
 ===== The `percentage` value type
 The `integer` value type has the format:
 
-    percentage/<pre|post>/<percentage symbol>/<float value>
+    percentage/<pre|post>/<percentage symbol>/<float value|decimal value>
 
-See the `currency` value type for details.
+See the `currency` value type for details. The allowed number types are `float`
+and `decimal`.
 
 Examples: `percentage/post/%/float//,`
 
