@@ -3,7 +3,7 @@
 :sectnums:
 :sectnumlevels: 4
 
-Copyright (C) 2020 J. Férard <https://github.com/jferard>
+Copyright (C) 2020-2021 J. Férard <https://github.com/jferard>
 
 License: GPLv3
 
@@ -142,6 +142,15 @@ The choice of the CSV format to type the CSV file guarantees that MetaCSV
 libraries will be easy to implement and only depend on a CSV reader/writer
 library or module only.
 
+=== Difference with serializers/deserializers
+Some libraries may use CSV files for serialization/deserialization of data.
+Those libraries may be able to store and retrieve complex objects that outreach
+ MetaCSV basic types.
+
+The main difference is that MetaCSV aims to provide a general way of describing
+CSV files formats whereas a libray will use its own CSV format to store objects.
+
+
 == Full specification (DRAFT 0)
 === Definitions
 ==== MetaCSV
@@ -175,9 +184,15 @@ _CSV text_.
 A _MetaCSV reader_ must read and type a _CSV text_ along with any
 _compatible MetaCSV format_.
 
+A _MetaCSV reader_ should be able to handle invalid values stored into the
+_CSV text_.
+
 A _MetaCSV writer_ must write typed records to a _CSV text_ and produce a
 _compatible MetaCSV format_. If the user does not require a _MetaCSV format_,
 the produced _MetaCSV format_ should be _canonical_.
+
+A _MetaCSV bridge_ is a piece of software that converts CSV files to another
+in-memory or on disk format, such as XML, JSON, ...
 
 ==== MetaCSV library (or module)
 A _MetaCSV library_ (or module) must provide a _MetaCSV structure_, a
@@ -188,8 +203,16 @@ It should provide a _MetaCSV reader_ and a _MetaCSV writer_.
 It should not depend on non standard libraries (or modules) other than a
 library (or module) to read and write CSV files.
 
-If some formats are handled by the standard libraries (or modules), the MetaCSV
-library may provide a conversion to those formats.
+If some data formats are handled by the standard libraries (or modules) of
+the language, the MetaCSV library may provide a _MetaCSV bridge_ to those
+formats.
+
+If the MetaCSV library provides _MetaCSV reader_, it may provide several ways
+to handle invalid values :
+* throw an exception
+* return a null value
+* return the raw value as a text
+* return a custom `ReadError` object that wraps the raw value
 
 === Domain, key, value
 The `domain` column can be either `meta`, `file`, `csv` or `data`.

@@ -1,0 +1,4 @@
+a boolean|a currency|another currency|a date|a datetime|a decimal|a float|an integer|a percentage|another percentage|a text|an URL
+T|5 €|$10.3|20/04/1975|1975-04-20T13:45:00|10.3|1 232,0|56|56%|78.2%|"meta csv |"|https://github.com/jferard
+<NULL>|17 €|$10.8|21/11/2017|<NULL>|1.03|-2,50|76|58%|18.2%|"""java-mcsv"""|<NULL>
+F|7|$17.8|3/6/2003|<NULL>|32.5|-2 456,50|1786|85%|12.8%|py-mcsv|<NULL>
