@@ -345,6 +345,7 @@ http://docs.oasis-open.org/office/v1.2/os/OpenDocument-v1.2-os-part1.html=__RefH
 | `currency`  | a currency value
 | `date`      | a date value
 | `datetime`  | a datetime value
+| `decimal`   | a decimal value
 | `float`     | a float value
 | `integer`   | an integer value
 | `percentage`| a percentage value
@@ -418,6 +419,25 @@ The `datetime` value type has the format:
 See the `date` value type for details.
 
 Canonical forms: `date/yyyy-MM-dd'T'HH:mm:ss[.S+][X]`
+
+===== The `decimal` value type
+The `decimal` value type has the format:
+
+    decimal/<thousands separator>/<decimal separator>
+
+where:
+
+* `<thousands separator>`: the separator to group digits by thousands.
+* `<decimal separator>`: the separators between the integer part and the
+fractional part of the number.
+
+A decimal is a type that represents decimal numbers exactly. If the decimal
+type is not available in a language, this type can be interpreted as
+`float/<thousands separator>/<decimal separator>`.
+
+Examples: `decimal//.`, `decimal/,/.`
+
+Canonical form: `decimal//.`
 
 ===== The `float` value type
 The `float` value type has the format:
