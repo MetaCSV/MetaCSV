@@ -267,8 +267,11 @@ Canonical value is `false`.
 
 
 ==== The `file`-`line_terminator` value
-The value is one of: `\n`, `\r\n`, `n\r`, `\r` or any other byte sequence that
-is the line terminator of the CSV file.
+The value is one of: `\n`, `\r\n`, `\n\r`, `\r` or any other byte sequence that
+is the line terminator of the CSV file. This value must be escaped:
+
+* the chars *backslash* and *n* mean a line feed;
+* the chars *backslash* and *r* mean a carriage return.
 
 Canonical value is `\r\n`.
 
